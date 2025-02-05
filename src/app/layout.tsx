@@ -11,10 +11,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className=" flex justify-between bg-red-300 sm:bg-blue-300 md:bg-green-300 lg:bg-pink-400 xl:bg-yellow-200 2xl:bg-slate-400">
-        <div className=""><LeftBar/></div>
-        <div className="">{children}</div>
-        <div className=""><RightBar/></div>
+        <div className=" max-w-screen-md lg:max-w-screen-lg  mx-auto xl:max-w-screen-xl xxl:max-w-screen-xxl flex justify-between "> 
+        <div className="px-2 xsm:px-4 xxl:px-8 "><LeftBar/></div>
+        <div className=" flex-1 lg:min-w-[600px] border-x-[1px] border-borderGray">{children}</div>
+        <div className="hidden lg:flex ml-4  md:ml-8 flex-1 "><RightBar/></div>
 
         </div>
         

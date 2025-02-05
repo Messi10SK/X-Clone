@@ -1,6 +1,16 @@
 
 export default function LeftBar() {
   return (
-    <div>LeftBar</div>
+    <div>
+
+      
+      {/* LOGO Menu Button */}
+
+
+
+      {/* USER */}
+
+
+    </div>
   )
 }
