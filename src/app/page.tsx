@@ -1,18 +1,22 @@
-"use client";
+import Feed from "../components/Feed";
+import Share from "../components/Share"
+import Link from "next/link";
 
 
-
-import { IKImage, IKVideo, ImageKitProvider, IKUpload, ImageKitContext } from "imagekitio-next";
-import Image from "./components/Image";
-
-const urlEndpoint = process.env.NEXT_PUBLIC_URL_ENDPOINT;
 const Homepage = () =>{
   return (
-    <div className=" relative w-[600px] h-[600px]">
-      Homepage
-     
-      <IKImage urlEndpoint={urlEndpoint} path="public/general/post.jpeg" width={600} height={600} alt="" />
-      <Image path = "public/general/post.jpeg" w={600} h={600} alt="" />
+    <div>
+
+    
+    <div className=" px-4 pt-4 flex justify-between text-textGray font-bold border-b-[1px] border-borderGray">
+      <Link className ="pb-3 flex items-center border-b-4 border-iconBlue " href="/">For you</Link>
+      <Link className ="pb-3 flex items-center   " href="/">Following</Link>
+      <Link className ="pb-3 flex items-center   " href="/">RamJi</Link>
+      <Link className ="pb-3 flex items-center   " href="/">KrishnaJi</Link>
+      <Link className ="pb-3 flex items-center   " href="/">RadhaJi</Link>
+    </div>
+    <Share/>
+    <Feed/>
     </div>
   )
 }
