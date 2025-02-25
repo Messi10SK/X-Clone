@@ -24,7 +24,7 @@ export const shareAction = async (
       {
         file: buffer,
         fileName: file.name,
-        folder: "/posts",
+        folder: "public/posts",
         ...(file.type.includes("image") && {
           transformation: {
             pre: transformation,

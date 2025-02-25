@@ -18,20 +18,20 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
  
   // FETCH POST MEDIA
 
-  // const getFileDetails = async (
-  //   fileId: string
-  // ): Promise<FileDetailsResponse> => {
-  //   return new Promise((resolve, reject) => {
-  //     imagekit.getFileDetails(fileId, function (error, result) {
-  //       if (error) reject(error);
-  //       else resolve(result as FileDetailsResponse);
-  //     });
-  //   });
-  // };
+  const getFileDetails = async (
+    fileId: string
+  ): Promise<FileDetailsResponse> => {
+    return new Promise((resolve, reject) => {
+      imagekit.getFileDetails(fileId, function (error, result) {
+        if (error) reject(error);
+        else resolve(result as FileDetailsResponse);
+      });
+    });
+  };
 
-  // const fileDetails = await getFileDetails("675d943be375273f6003858f");
+  const fileDetails = await getFileDetails("67b9912b432c47641679c779");
 
-  // console.log(fileDetails);
+  console.log(fileDetails);
 
   return (
     <div className="p-4 border-y-[1px] border-borderGray">
@@ -58,7 +58,7 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
             type === "status" && "hidden"
           } relative w-10 h-10 rounded-full overflow-hidden`}
         >
-          <Image path="general/avatar.png" alt="" w={100} h={100} tr={true} />
+          <Image path="public/general/avatar.png" alt="" w={100} h={100} tr={true} />
         </div>
         {/* CONTENT */}
         <div className="flex-1 flex flex-col gap-2">
@@ -105,8 +105,9 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
               iure nam voluptas soluta pariatur inventore.
             </p>
           </Link>
-          <Image path="general/post.jpeg" alt="" w={600} h={600} />
+          <Image path="public/general/post.jpeg" alt="" w={600} h={600} />
           {/* AFTER FETCHING THE POST MEDIA */}
+         
           {/* {fileDetails && fileDetails.fileType === "image" ? (
             <Image
               path={fileDetails.filePath}
@@ -120,10 +121,10 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
               path={fileDetails.filePath}
               className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
             />
-          )} */}
+          )}
           {type === "status" && (
             <span className="text-textGray">8:41 PM · Dec 5, 2024</span>
-          )}
+          )} */}
           <PostInteractions />
         </div>
       </div>

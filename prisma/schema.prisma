@@ -1,0 +1,134 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String      @id 
+  email       String   @unique
+  username    String?  @unique
+  displayName String?
+  bio         String?
+  location    String?
+  job         String?
+  website     String?
+  img         String?
+  cover       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  //Relations
+
+  posts       Post[]
+  likes       Like[]
+  saves       SavedPosts[]
+
+  followers   Follow[] @relation("UserFollowers")
+  followings  Follow[] @relation("UserFollowings")
+
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  desc      String?   @db.VarChar(255)
+  img       String?
+  imgHeight Int?     
+  video     String?
+  isSensitive Boolean @default(false)
+  // RELATIONS
+  user    User     @relation(fields: [userId], references: [id])
+  userId  String
+
+  rePostId Int?
+  rePost  Post? @relation("RePosts" , fields :[rePostId], references: [id])
+  rePosts Post[] @relation("RePosts")
+
+
+  parentPostId Int?
+  parentPost Post? @relation("PostComments" , fields: [parentPostId], references: [id])
+  comments Post[] @relation("PostComments")
+
+  likes Like[]
+
+  saves SavedPosts[]
+
+
+}
+
+
+model Like {
+  id        Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  // Relations
+
+  userId  String
+  postId Int
+  user    User     @relation(fields: [userId], references: [id])
+  post    Post     @relation(fields: [postId], references: [id])
+}
+
+
+model SavedPosts {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  // RELATIONS
+  userId String
+  postId Int
+
+  user User @relation(fields: [userId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
+}
+
+model Follow {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  // RELATIONS
+  followerId  String
+  followingId String
+
+  follower  User @relation("UserFollowers", fields: [followerId], references: [id])
+  following User @relation("UserFollowings", fields: [followingId], references: [id])
+}
+
+
+//  Repost ke liye humne Post model ke andar hi ek self-referencing relation define kiya hai:
+//   rePostId Int? // Original post ka ID store karega
+  // rePost  Post? @relation("RePosts", fields: [rePostId], references: [id]) // Reference to the original post
+  // rePosts Post[] @relation("RePosts") // Sare reposts collect karega
+
+
+
+// id(Post ID)     desc	           parentPostId (Reply to)
+// P1	          "Hello World"	             NULL (original post)
+// P2	          "Nice post!"	             P1 (comment on P1)
+// P3	         "I agree!"	               P2 (comment on P2)
+
+
+
+// 💡 Summary: Har Comment Bhi Ek Post Hai
+// Comment = Ek special type ka post
+// Agar sirf text hoga → desc field use hogi
+// Agar image/video hoga → img ya video field use hogi
+// Agar comment ke andar reply hai → Wo bhi ek "Post" hoga jo uske parent post se linked hoga
+
+
+
+// id (Post ID)	desc	      parentPostId (Reply to)	          comments
+// P1	"Hello World"       	NULL (original post)            	[P2, P3] (2 comments)
+// P2	"Nice post!"	       P1 (comment on P1)	             [P4] (1 reply)
+// P3	"Great content"           	P1 (comment on P1)	           [] (no reply)
+// P4	"I agree!"	         P2 (reply on P2)                	[]   (no reply)

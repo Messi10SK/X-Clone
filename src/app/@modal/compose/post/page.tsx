@@ -24,8 +24,8 @@ const PostModal = () => {
         <div className="py-8 flex gap-4">
           <div className="relative w-10 h-10 rounded-full overflow-hidden">
             <Image
-              path="general/avatar.png"
-              alt="Lama Dev"
+              path="public/general/avatar.png"
+              alt="sk"
               w={100}
               h={100}
               tr={true}
@@ -41,42 +41,42 @@ const PostModal = () => {
         <div className=" flex items-center justify-between gap-4 flex-wrap border-t border-borderGray pt-4">
           <div className="flex gap-4 flex-wrap">
             <Image
-              path="icons/image.svg"
+              path="public/icons/image.svg"
               alt=""
               w={20}
               h={20}
               className="cursor-pointer"
             />
             <Image
-              path="icons/gif.svg"
+              path="public/icons/gif.svg"
               alt=""
               w={20}
               h={20}
               className="cursor-pointer"
             />
             <Image
-              path="icons/poll.svg"
+              path="public/icons/poll.svg"
               alt=""
               w={20}
               h={20}
               className="cursor-pointer"
             />
             <Image
-              path="icons/emoji.svg"
+              path="public/icons/emoji.svg"
               alt=""
               w={20}
               h={20}
               className="cursor-pointer"
             />
             <Image
-              path="icons/schedule.svg"
+              path="public/icons/schedule.svg"
               alt=""
               w={20}
               h={20}
               className="cursor-pointer"
             />
             <Image
-              path="icons/location.svg"
+              path="public/icons/location.svg"
               alt=""
               w={20}
               h={20}

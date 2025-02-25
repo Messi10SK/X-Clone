@@ -10,3 +10,19 @@ body {
   background: black;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.custom-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE/Edge */
+.custom-scrollbar::-ms-scrollbar {
+  display: none;
+}
